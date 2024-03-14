@@ -64,7 +64,7 @@ CREATE TABLE Orders (
   customer_ID int,
   PRIMARY KEY (order_ID),
   FOREIGN KEY (employee_ID) REFERENCES Employees(employee_ID) ON DELETE SET NULL,
-  FOREIGN KEY (customer_ID) REFERENCES Customers(customer_ID) ON DELETE CASCADE
+  FOREIGN KEY (customer_ID) REFERENCES Customers(customer_ID) ON DELETE SET NULL
 );
 
 -- Products_Orders
