@@ -52,9 +52,9 @@ The outline describes the entities that **3F** will track in the relational data
   - Relationship: This intersection table reduces the relationship between the products and the orders from M:M to two 1:M relationships.
 
 ## ER Diagram
-[Entity Relationship Diagram](/img/ER_Diagram.png)
+![Entity Relationship Diagram image shows the entities and only any Primary Key desginations](/img/ER_Diagram.png)
 ## Schema
-[Relational Database Schema](/img/Schema.png)
+![Relational Database Schema image shows the entities and relations among them to include Primary Keys and Foreign Key designations](/img/Schema.png)
 
 ## Citations:
 Citations for all <.html> files based on and altered from (14 Mar 2024): 
