@@ -1,3 +1,12 @@
+<!-- ------------------------------------------
+# Citations for products.html from 1. NODE.js starter app code and 2. course starter code
+# 22 Feb 2024
+# 1.  Adapted from material in nodejs-starter-app in OSU CS340 course github repo
+#     URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+# 2.  Adapted from material in course material from Project Step 3 starter code called bsg_HTML_UI.zip
+#     URL: https://canvas.oregonstate.edu/courses/1946034/assignments/9456216?wrap=1
+-------------------------------------------- -->
+
 <html>
   <head>
     <style>
@@ -76,6 +85,7 @@
           <th>Edit</th>
           <th>Delete</th>
         </tr>
+<!-- 	handlebars to populate table -->
         {{#each model.result}}
         <tr>
           <td>{{product_ID}}</td>
@@ -91,6 +101,7 @@
       </table>
       <p>&nbsp;</p>
       </div> <!-- end browse Products -->
+	    
       <div id="insert" style="display:none">
         <form method="POST" id="addProduct" action="/addProduct" method="post">
             <legend><strong>Add Product</strong></legend>
@@ -105,6 +116,7 @@
         </form>
       </div>  <!--end insert Products -->
       <p>&nbsp</p>
+	    
       <div id="update" style="display:none">
         <form method="POST" id="updateProduct" action="/updateProduct">
           <legend><strong>Update Product</strong></legend>
@@ -120,5 +132,6 @@
         </form>
       </div>  <!--end update Product -->
       <p>&nbsp</p>
+	    
   </body>
 </html>
