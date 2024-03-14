@@ -7,6 +7,13 @@
             Nicholas Murray
 **********/
 
+/*
+# Citation for SQL Queries of Multiple Table (JOINS)
+# 29 Jan 2024
+# Adapted from material from Activity 5 in OSU CS340 course
+# URL: https://canvas.oregonstate.edu/courses/1946034/pages/activity-5-sql-queries-of-multiple-tables-joins?module_item_id=23809309
+*/
+
 /**********
     EMPLOYEE.html page manipulations
 **********/
