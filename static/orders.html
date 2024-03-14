@@ -1,3 +1,17 @@
+<!-- ------------------------------------------
+# Citations for orders.html from 
+# 	1. NODE.js starter app code 
+#	2. course starter code
+# 	3. Select a value in a select dropdown
+# 22 Feb 2024
+# 1.  Adapted from material in nodejs-starter-app in OSU CS340 course github repo
+#     URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+# 2.  Adapted from material in course material from Project Step 3 starter code called bsg_HTML_UI.zip
+#     URL: https://canvas.oregonstate.edu/courses/1946034/assignments/9456216?wrap=1
+# 3.  Copied from stackoverflow to facilitate updateOrder function
+#     URL: https://stackoverflow.com/questions/8140862/how-to-select-a-value-in-a-select-dropdown-with-javascript
+-------------------------------------------- -->
+
 <html>
   <head>
     <style>
@@ -95,6 +109,7 @@
           <th>Delete</th>
           <th>Add Item</th>
         </tr>
+<!-- handlebars to populate table -->
         {{#each model.result}}
         <tr>
           <td>{{order_ID}}</td>
@@ -110,6 +125,7 @@
       </table>
     </div> <!-- end browse Orders -->
     <p>&nbsp;</p>
+	    
     <div id="insert" style="display:none">
         <form method="POST" id="addOrder" action="/addOrder" method="post">
             <legend><strong>Add Order</strong></legend>
@@ -142,6 +158,7 @@
         </form>
       </div>  <!--end insert Order -->
       <p>&nbsp;</p>
+	    
       <div id="insertItem" style="display:none">
         <form method="POST" id="addItem" action="/addProducts_Orders">
             <legend><strong>Add Item to Order</strong></legend>
@@ -154,7 +171,6 @@
                   <option value="{{product_ID}}">{{name}} - Inv:{{inventory}} - Price:{{wholesale_unit_price}}</option>
                   {{/each}}
                 </select><br />
-
                 <label> <strong>Quantity</strong> </label> <input required type="number" name="quantity" id="quantity"><br />
                 <label> Selling unit price </label> <input required type="number" step=".01" name="price_per_unit" id="price_per_unit" ><br />
               </fieldset>
@@ -163,6 +179,7 @@
         </form>
       </div>  <!--end insert Item -->
       <p>&nbsp</p>
+	    
       <div id="update" style="display:none">
         <form method="POST" id="updateOrder" action="/updateOrder">
           <legend><strong>Update Order</strong></legend>
