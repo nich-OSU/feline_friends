@@ -1,0 +1,124 @@
+<html>
+  <head>
+    <style>
+      body {background-color: powderblue;}
+      h1   {color: rgb(43, 159, 5);}
+      p    {color: rgb(184, 1, 1);}
+    </style>
+    <title>Customers</title>
+    <link rel="stylesheet" href="stylesheet" type="text/css">
+    <script language="Javascript">
+      // Determines the part of the form that is shown
+      // Browse, insert, update, delete
+      function showform(dowhat) {
+        if (dowhat == 'insert') {
+          document.getElementById('browse').style.display = 'none';
+          document.getElementById('insert').style.display = 'block';
+          document.getElementById('update').style.display = 'none';
+          document.getElementById('delete').style.display = 'none';
+	  		} else if (dowhat == 'update') {
+          document.getElementById('browse').style.display = 'none';
+          document.getElementById('insert').style.display = 'none';
+          document.getElementById('update').style.display = 'block';
+          document.getElementById('delete').style.display = 'none';
+			  } else if (dowhat == 'delete') {
+          document.getElementById('browse').style.display = 'none';
+          document.getElementById('insert').style.display = 'none';
+          document.getElementById('update').style.display = 'none';
+          document.getElementById('delete').style.display = 'block';
+        } else if (dowhat == 'all'){
+          document.getElementById('browse').style.display = 'block';
+          document.getElementById('insert').style.display = 'block';
+          document.getElementById('update').style.display = 'block';
+          document.getElementById('delete').style.display = 'block';
+        } else { //by default display browse
+          document.getElementById('browse').style.display = 'block';
+          document.getElementById('insert').style.display = 'none';
+          document.getElementById('update').style.display = 'none';
+          document.getElementById('delete').style.display = 'none';
+        }
+      }
+      function newCustomer() { showform('insert'); }
+
+      function updateCustomer(employee_id, business_name, contact_name,email, phone) {
+
+        document.getElementById('browse').style.display = 'none';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'block';
+
+        document.getElementById('customer_ID').value = employee_id;
+
+        document.getElementById('business_name').value = business_name;
+        document.getElementById('contact_name').value = contact_name;
+        document.getElementById('email').value = email;
+        document.getElementById('phone').value = phone;
+
+    }
+      function deleteCustomer(employee_id) { showform('delete'); }
+      function browseCustomers() { showform('browse'); }
+      function showAll() { showform('all') }
+    </script>
+  </head>
+  <body onload="browseCustomers()">
+    <a href="#" onClick="showAll()"><a href="index.html"><h3>Home</h3></a>
+    [ <a href="employees">Employees</a> | <a href="customers">Customers</a> | <a href="products">Products</a> | <a href="orders">Orders</a> | <a href="invoices">Invoices</a> ]
+    <h1>Customers</h1>
+
+    <div id="browse">
+      <table border="1" cellpadding="5"  class="table table-striped">
+        <a href="#" onClick="newCustomer()"><h3>New Customer</h3></a>
+        <tr>
+          <th>ID</th>
+          <th>Business Name</th>
+          <th>Contact Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+
+        {{#each model.result}}
+        <tr>
+          <td>{{customer_ID}}</td>
+          <td align="right" >{{business_name}}</td>
+          <td align="right" >{{contact_name}}</td>
+          <td>{{email}}</td>
+          <td>{{phone}}</td>
+          <td><a href="#" onClick="updateCustomer('{{customer_ID}}', '{{business_name}}', '{{contact_name}}','{{email}}', '{{phone}}' )">Edit</a></td>
+          <td><a href="/deleteCustomer/{{customer_ID}}">Delete</a></td>
+        </tr>
+        {{/each}}
+      </table>
+      <p>&nbsp;</p>
+      </div> <!-- end browse Customer -->
+      <div id="insert" style="display:none">
+        <form method="POST" id="addCustomer" action="/addCustomer" method="post">
+            <legend><strong>Add Customer</strong></legend>
+              <fieldset class="fields">
+                <label> Business Name </label> <input required type="text" name="business_name"><br />
+                <label> Contact Name </label> <input required type="text" name="contact_name"><br />
+                <label> Email </label> <input required type="email" name="email"><br />
+                <label> Phone(###-###-####) </label> <input required type="tel" name="phone" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"><br />
+              </fieldset>
+              <input class="btn" type="submit" id="addCustomer" value="Add Customer">
+              <input class="btn" type="button" value="cancel" onClick="browseCustomers()">
+        </form>
+      </div>  <!--end insert Customer -->
+      <p>&nbsp</p>
+      <div id="update" style="display:none">
+        <form method="POST" id="updateCustomer" action="/updateCustomer">
+          <legend><strong>Update Customer</strong></legend>
+          <fieldset class="fields">
+            <label> ID: </label> <input required type="text" name="customer_ID" id="customer_ID" ><br />
+            <label> Business Name </label> <input required type="text" name="business_name" id="business_name" ><br />
+            <label> Contact Name </label> <input required type="text" name="contact_name" id="contact_name" ><br />
+            <label> Email </label> <input required type="email" name="email" id="email" ><br />
+            <label> Phone(###-###-####) </label> <input required type="tel" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"><br />
+          </fieldset>
+          <input class="btn" type="submit" id="UpdateSaveCustomer" value="Save Customer Update">
+          <input class="btn" type="button" value="cancel" onClick="browseCustomers()">
+        </form>
+      </div>  <!--end update Customer -->
+      <p>&nbsp</p>
+  </body>
+</html>

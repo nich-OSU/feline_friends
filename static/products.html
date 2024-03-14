@@ -1,0 +1,124 @@
+<html>
+  <head>
+    <style>
+      body {background-color: powderblue;}
+      h1   {color: rgb(43, 159, 5);}
+      p    {color: rgb(184, 1, 1);}
+      </style>
+    <title>Products</title>
+    <link rel="stylesheet" href="stylesheet" type="text/css">
+    <script language="Javascript">
+      // Determines the part of the form that is shown
+      // Browse, insert, update, delete
+      function showform(dowhat) {
+        if (dowhat == 'insert') {
+          document.getElementById('browse').style.display = 'none';
+          document.getElementById('insert').style.display = 'block';
+          document.getElementById('update').style.display = 'none';
+          document.getElementById('delete').style.display = 'none';
+	  		} else if (dowhat == 'update') {
+          document.getElementById('browse').style.display = 'none';
+          document.getElementById('insert').style.display = 'none';
+          document.getElementById('update').style.display = 'block';
+          document.getElementById('delete').style.display = 'none';
+			  } else if (dowhat == 'delete') {
+          document.getElementById('browse').style.display = 'none';
+          document.getElementById('insert').style.display = 'none';
+          document.getElementById('update').style.display = 'none';
+          document.getElementById('delete').style.display = 'block';
+        } else if (dowhat == 'all'){
+          document.getElementById('browse').style.display = 'block';
+          document.getElementById('insert').style.display = 'block';
+          document.getElementById('update').style.display = 'block';
+          document.getElementById('delete').style.display = 'block';
+        } else { //by default display browse
+          document.getElementById('browse').style.display = 'block';
+          document.getElementById('insert').style.display = 'none';
+          document.getElementById('update').style.display = 'none';
+          document.getElementById('delete').style.display = 'none';
+        }
+      }
+      function newProduct() { showform('insert'); }
+      function updateProduct(employee_id, name, description,whole_sale_unit_price, inventory) {
+        document.getElementById('browse').style.display = 'none';
+          document.getElementById('insert').style.display = 'none';
+          document.getElementById('update').style.display = 'block';
+
+
+          document.getElementById('product_ID').value = employee_id;
+
+          document.getElementById('name').value = name;
+          document.getElementById('description').value = description;
+          document.getElementById('wholesale_unit_price').value = whole_sale_unit_price;
+          document.getElementById('inventory').value = inventory;
+
+
+       }
+      function deleteProduct(employee_id) { showform('delete'); }
+      function browseProducts() { showform('browse'); }
+      function showAll() { showform('all') }
+    </script>
+  </head>
+  <body onload="browseProducts()">
+    <a href="#" onClick="showAll()"><a href="index.html"><h3>Home</h3></a>
+    [ <a href="employees">Employees</a> | <a href="customers">Customers</a> | <a href="products">Products</a> | <a href="orders">Orders</a> | <a href="invoices">Invoices</a> ]
+    <h1>Products</h1>
+
+    <div id="browse">
+      <table border="1" cellpadding="5"  class="table table-striped">
+        <a href="#" onClick="newProduct()"><h3>New Product</h3></a>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Inventory</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        {{#each model.result}}
+        <tr>
+          <td>{{product_ID}}</td>
+          <td align="right" >{{name}}</td>
+          <td align="right" >{{description}}</td>
+          <td>{{wholesale_unit_price}}</td>
+          <td>{{inventory}}</td>
+          <td><a href="#" onClick="updateProduct('{{product_ID}}', '{{name}}', '{{description}}','{{wholesale_unit_price}}', '{{inventory}}' )">Edit</a></td>
+          <td><a href="/deleteProduct/{{product_ID}}">Delete</a></td>
+        </tr>
+        {{/each}}
+
+      </table>
+      <p>&nbsp;</p>
+      </div> <!-- end browse Products -->
+      <div id="insert" style="display:none">
+        <form method="POST" id="addProduct" action="/addProduct" method="post">
+            <legend><strong>Add Product</strong></legend>
+              <fieldset class="fields">
+                <label> Name </label> <input required type="text" name="name"><br />
+                <label> Description </label> <input required type="text" name="description"><br />
+                <label> Price </label> <input required type="number" step=".01" name="price"><br />
+                <label> Inventory </label> <input required type="number" name="inventory"><br />
+              </fieldset>
+              <input class="btn" type="submit" id="addProduct" value="Add Product">
+              <input class="btn" type="button" value="cancel" onClick="browseProducts()">
+        </form>
+      </div>  <!--end insert Products -->
+      <p>&nbsp</p>
+      <div id="update" style="display:none">
+        <form method="POST" id="updateProduct" action="/updateProduct">
+          <legend><strong>Update Product</strong></legend>
+          <fieldset class="fields">
+            <label> ID: </label>  <input required type="text"  id="product_ID" name="product_ID"><br />
+            <label> Name </label> <input required type="text" name="name"  id="name" ><br />
+            <label> Description </label> <input required type="text" name="description" id="description"><br />
+            <label> Price </label> <input required type="number" step=".01" name="wholesale_unit_price" id="wholesale_unit_price"><br />
+            <label> Inventory </label> <input required type="number" name="inventory" id="inventory"><br />
+          </fieldset>
+          <input class="btn" type="submit" id="UpdateSaveProduct" value="Save Product Update">
+          <input class="btn" type="button" value="cancel" onClick="browseProducts()">
+        </form>
+      </div>  <!--end update Product -->
+      <p>&nbsp</p>
+  </body>
+</html>

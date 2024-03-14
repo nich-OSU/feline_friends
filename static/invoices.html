@@ -1,0 +1,102 @@
+<html>
+  <head>
+    <style>
+      body {background-color: powderblue;}
+      h1   {color: rgb(43, 159, 5);}
+      p    {color: rgb(184, 1, 1);}
+      </style>
+    <title>Invoices</title>
+    <link rel="stylesheet" href="stylesheet" type="text/css">
+    <script language="Javascript">
+      // Determines the part of the form that is shown
+      // Browse, insert, update, delete
+      function showform(dowhat) {
+        if (dowhat == 'find') {
+          document.getElementById('find').style.display = 'block';
+          document.getElementById('browse').style.display = 'block';
+          document.getElementById('update').style.display = 'none';
+          document.getElementById('delete').style.display = 'none';
+	  		} else if (dowhat == 'update') {
+          document.getElementById('find').style.display = 'none';
+          document.getElementById('browse').style.display = 'block';
+          document.getElementById('update').style.display = 'block';
+          document.getElementById('delete').style.display = 'none';
+			  } else if (dowhat == 'all'){
+          document.getElementById('find').style.display = 'block';
+          document.getElementById('browse').style.display = 'block';
+          document.getElementById('update').style.display = 'block';
+          document.getElementById('delete').style.display = 'block';
+        } else if (dowhat == 'delete'){
+          document.getElementById('find').style.display = 'none';
+          document.getElementById('browse').style.display = 'block';
+          document.getElementById('update').style.display = 'none';
+          document.getElementById('delete').style.display = 'block';
+        } else { //by default display browse
+          document.getElementById('find').style.display = 'block';
+          document.getElementById('browse').style.display = 'block';
+          document.getElementById('update').style.display = 'none';
+        }
+      }
+      function findCustomerInvoices() { showform('find'); }
+      function updateInvoice() { showform('update'); }
+      function browseInvoice() { showform('browse'); }
+      function deleteInvoiceLine() { showform('delete'); }
+      function showAll() { showform('all') }
+      function addHidden(){
+        var selectObj = document.getElementById('customer_ID');
+        document.getElementById('customer_name').value= selectObj.options[selectObj.selectedIndex].text;
+      }
+    </script>
+  </head>
+  <body onload="findCustomerInvoices()">
+    <a href="index.html"><h3>Home</h3></a>
+    [ <a href="employees">Employees</a> | <a href="customers">Customers</a> | <a href="products">Products</a> | <a href="orders">Orders</a> | <a href="invoices">Invoices</a> ]
+    <h1>Invoices</h1>
+    <div id="find">
+      <fieldset>
+        <form action="/invoices" method="post">
+          <label> <strong>Customer Name:</strong> </label>
+          <select name="customer_ID" id="customer_ID" onchange="addHidden(this)">
+            <option value="none" selected disabled >-Select customer-</option>
+            {{#each customers.result}}
+            <option value="{{customer_ID}}">{{business_name}}</option>
+            {{/each}}
+          </select>
+          <input type="hidden" name="customer_name" id="customer_name" />
+          <button type="submit" value="Lookup Invoices" onclick="addHidden()">Lookup Invoices</button><br/><br/>
+          Select a customer in the drop down, and press the button to find the invoices for the customer.
+        </form>
+      </fieldset>
+    </div> <!--end FIND the Customer Invoices-->
+    <br>
+    <div id="browse">
+      <legend>Orders for: <strong><em>{{customer_name}}</em></strong></legend>
+      <table border="1" cellpadding="5"  class="table table-striped">
+        <tr>
+          <th>order ID</th>
+          <th>status</th>
+          <th>order date</th>
+          <th>product ID</th>
+          <th>product Name</th>
+          <th>wholesale price</th>
+          <th>quantity</th>
+          <th>selling unit price</th>
+        </tr>
+        {{#each invoices.result}}
+        <tr>
+          <td align="center">{{order_ID}}</td>
+          <td align="center">{{order_status}}</td>
+          <td align="center">{{formatDate order_date}}</td>
+          <td align="center">{{product_ID}}</td>
+          <td align="center">{{name}}</td>
+          <td align="center">{{wholesale_unit_price}}</td>
+          <td align="center">{{quantity}}</td>
+          <td align="center">{{price_per_unit}}</td>
+        </tr>
+        {{/each}}
+      </table>
+      <p>&nbsp;</p>
+      </div> <!-- end browse Products -->
+      <p>&nbsp;</p>
+  </body>
+</html>

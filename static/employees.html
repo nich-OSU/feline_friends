@@ -1,0 +1,118 @@
+<html>
+  <head>
+    <style>
+      body {background-color: powderblue;}
+      h1   {color: rgb(43, 159, 5);}
+      p    {color: rgb(184, 1, 1);}
+      </style>
+    <title>Employees</title>
+    <link rel="stylesheet" href="" type="text/css">
+    <script language="Javascript">
+      // Determines the part of the form that is shown
+      // Browse, insert, update, delete
+      function showform(dowhat) {
+        if (dowhat == 'insert') {
+          document.getElementById('browse').style.display = 'none';
+          document.getElementById('insert').style.display = 'block';
+          document.getElementById('update').style.display = 'none';
+
+        } else if (dowhat == 'all'){
+          document.getElementById('browse').style.display = 'block';
+          document.getElementById('insert').style.display = 'block';
+          document.getElementById('update').style.display = 'block';
+
+        } else { //by default display browse
+          document.getElementById('browse').style.display = 'block';
+          document.getElementById('insert').style.display = 'none';
+          document.getElementById('update').style.display = 'none';
+        }
+      }
+      function newEmployee() { showform('insert'); }
+      function updateEmployee(employee_id, first_name, last_name, email, phone, role) {
+
+          document.getElementById('browse').style.display = 'none';
+          document.getElementById('insert').style.display = 'none';
+          document.getElementById('update').style.display = 'block';
+
+          document.getElementById('eid').value = employee_id;
+
+          document.getElementById('fname').value = first_name;
+          document.getElementById('lname').value = last_name;
+          document.getElementById('eemail').value = email;
+          document.getElementById('ephone').value = phone;
+          document.getElementById('erole').value = role;
+
+       }
+      function deleteEmployee(employee_id) { showform('delete'); }
+      function browseEmployees() { showform('browse'); }
+      function showAll() { showform('all') }
+    </script>
+  </head>
+  <body onload="browseEmployees()">
+    <a href="#" onClick="showAll()"><a href="index.html"><h3>Home</h3></a>
+    [ <a href="employees">Employees</a> | <a href="customers">Customers</a> | <a href="products">Products</a> | <a href="orders">Orders</a> | <a href="invoices">Invoices</a> ]
+    <h1>Employees</h1>
+
+    <div id="browse">
+      <table border="1" cellpadding="5"  class="table table-striped">
+        <a href="#" onClick="newEmployee()"><h3>New Employee</h3></a>
+        <tr>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Role</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        {{#each model.result}}
+        <tr>
+          <td>{{employee_ID}}</td>
+          <td align="right" >{{first_name}}</td>
+          <td align="right" >{{last_name}}</td>
+          <td>{{email}}</td>
+          <td>{{phone}}</td>
+          <td align="right" >{{role}}</td>
+          <td><a href="#" onClick="updateEmployee('{{employee_ID}}', '{{first_name}}', '{{last_name}}','{{email}}', '{{phone}}', '{{role}}' )">Edit</a></td>
+          <td><a href="/deleteEmployee/{{employee_ID}}">Delete</a></td>
+        </tr>
+        {{/each}}
+      </table>
+      <p>&nbsp;</p>
+      </div> <!-- end browse Employees -->
+      <div id="insert" style="display:none">
+        <form method="post" action="/addEmployee">
+            <legend><strong>Add Employee</strong></legend>
+              <fieldset class="fields">
+                <label> First Name </label> <input required type="text" name="first_name"><br />
+                <label> Last Name </label> <input required type="text" name="last_name"><br />
+                <label> Phone(###-###-####) </label> <input required type="tel" name="phone" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"><br />
+                <label> Email </label> <input required type="email" name="email"><br />
+                <label> Role </label> <input required type="text" name="role"><br />
+              </fieldset>
+              <input class="btn" type="submit" id="addEmployee" value="Add Employee">
+              <input class="btn" type="button" value="cancel" onClick="browseEmployees()">
+        </form>
+      </div>  <!--end insert Employee -->
+      <p>&nbsp</p>
+      <div id="update" style="display:none">
+        <form method="post" action="/updateEmployee">
+          <legend><strong>Update Employee</strong></legend>
+          <fieldset class="fields">
+            <label> ID: </label> <input required type="text" id="eid" name="empid" value=""><br />
+            <label> First Name </label> <input required type="text" name="fname" id="fname" value=""><br />
+            <label> Last Name </label> <input required type="text" name="lname" id="lname" value=""><br />
+            <label> Phone(###-###-####) </label> <input required type="tel" name="ephone" id="ephone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value=""><br />
+            <label> Email </label> <input required type="email" name="eemail" id="eemail" value=""><br />
+            <label> Role </label> <input required type="text" name="erole" id="erole" value=""><br />
+          </fieldset>
+          <input class="btn" type="submit" id="UpdateSaveEmployee" value="Save Employee Update">
+          <input class="btn" type="button" value="cancel" onClick="browseEmployees()">
+        </form>
+      </div>  <!--end update Employee -->
+      <p>&nbsp</p>
+      <!-- <p><a href="#" onClick="showAll()">Display all forms</a> </p> -->
+
+  </body>
+</html>

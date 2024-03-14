@@ -1,0 +1,106 @@
+<html>
+<head>
+<style>
+body {background-color: powderblue;}
+h1   {color: rgb(43, 159, 5);}
+p    {color: rgb(184, 1, 1);}
+</style>
+<title>Feeding Feline Friends 3F</title>
+<link rel="stylesheet" type="text/css" href="/static/style.css" media="screen" />
+<script language="JavaScript">
+		function showform(dowhat) {
+			/*
+			* browse, insert, update, delete
+			*/
+			if (dowhat == 'insert'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+			else if (dowhat == 'update'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'block';
+				document.getElementById('delete').style.display = 'none';
+			}
+			else if (dowhat == 'delete'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'block';
+			}
+      else if (dowhat == 'all'){
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('update').style.display = 'block';
+				document.getElementById('delete').style.display = 'block';
+			}
+			else { //by default display browse
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+		}
+    function newOrder() { showform('insert'); }
+    function showOrders() { showform ('browse'); }
+    function showAll() { showform ('all'); }
+</script>
+</head>
+
+<body onload="showOrders()">
+<h1>Feeding Feline Friends 3F</h1>
+
+[ <a href="employees">Employees</a> | <a href="customers">Customers</a> | <a href="products">Products</a> | <a href="orders">Orders</a> | <a href="invoices">Invoices</a> ]
+
+<h3>About</h3>
+<p>We are <strong>Group 76 "Seattle Snow Flurry"</strong>and this is our project for CS340.</p>
+<p>All links above are interface representation of our database tables.</p>
+<p><strong>"Feeding Feline Friends, 3F"</strong></p>
+<p>Sells in bulk cat food to local vet hospitals
+  and regional animal shelters.</p>
+	<ul>
+		<li><strong><a href="employees">Employees</a></strong>
+			<ul>
+				<li>Browse Employees</li>
+				<li>Add a new Employee</li>
+				<li>Update Employee Information</li>
+				<li>Delete Employees</li>
+			</ul>
+		</li>
+		<li><strong><a href="customers">Customers</a></strong>
+			<ul>
+				<li>Browse Customers</li>
+				<li>Add a new Customer</li>
+				<li>Update Customer Information</li>
+				<li>Delete Customers</li>
+			</ul>
+		</li>
+		<li><strong><a href="products">Products</a></strong>
+			<ul>
+				<li>Browse Products</li>
+				<li>Add new Products</li>
+				<li>Update Product Inventory and Prices</li>
+				<li>Delete Discontinued Products</li>
+			</ul>
+		</li>
+		<li><strong><a href="orders">Orders</a></strong>
+			<ul>
+				<li>Browse Orders</li>
+				<li>Add a new Order</li>
+				<li>Update Order Information</li>
+				<li>Delete an Order</li>
+				<li>Add items to an Order</li>
+				<li>Submit Orders for RETURN</li>
+			</ul>
+		</li>
+		<li><strong><a href="invoices">Invoices (Products_Orders)</a></strong>
+			<ul>
+				<li>Search Invoices by Customer</li>
+			</ul>
+		</li>
+	</ul>
+
+</body>
+</html>

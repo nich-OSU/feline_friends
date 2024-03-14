@@ -1,0 +1,186 @@
+<html>
+  <head>
+    <style>
+      body {background-color: powderblue;}
+      h1   {color: rgb(43, 159, 5);}
+      p    {color: rgb(184, 1, 1);}
+      </style>
+    <title>Orders</title>
+    <link rel="stylesheet" href="stylesheet" type="text/css">
+    <script language="Javascript">
+      // Determines the part of the form that is shown
+      // Browse, insert, update, delete
+
+      function setSelectedValue(selectObj, valueToSet) {
+        for (var i = 0; i < selectObj.options.length; i++) {
+          if (selectObj.options[i].text== valueToSet) {
+            selectObj.options[i].selected = true;
+            return;
+          }
+        }
+      }
+      function showform(dowhat) {
+        if (dowhat == 'insert') {
+          document.getElementById('browse').style.display = 'none';
+          document.getElementById('insert').style.display = 'block';
+          document.getElementById('insertItem').style.display = 'none';
+          document.getElementById('update').style.display = 'none';
+          document.getElementById('delete').style.display = 'none';
+        } else if (dowhat == 'insertItem') {
+          document.getElementById('browse').style.display = 'none';
+          document.getElementById('insert').style.display = 'none';
+          document.getElementById('insertItem').style.display = 'block';
+          document.getElementById('update').style.display = 'none';
+          document.getElementById('delete').style.display = 'none';
+	  		} else if (dowhat == 'update') {
+          document.getElementById('browse').style.display = 'none';
+          document.getElementById('insert').style.display = 'none';
+          document.getElementById('insertItem').style.display = 'none';
+          document.getElementById('update').style.display = 'block';
+
+			  } else if (dowhat == 'delete') {
+          document.getElementById('browse').style.display = 'none';
+          document.getElementById('insert').style.display = 'none';
+          document.getElementById('insertItem').style.display = 'none';
+          document.getElementById('update').style.display = 'none';
+          document.getElementById('delete').style.display = 'block';
+        } else if (dowhat == 'all'){
+          document.getElementById('browse').style.display = 'block';
+          document.getElementById('insert').style.display = 'block';
+          document.getElementById('insertItem').style.display = 'block';
+          document.getElementById('update').style.display = 'block';
+          document.getElementById('delete').style.display = 'block';
+        } else { //by default display browse
+          document.getElementById('browse').style.display = 'block';
+          document.getElementById('insert').style.display = 'none';
+          document.getElementById('insertItem').style.display = 'none';
+          document.getElementById('update').style.display = 'none';
+        }
+      }
+      function newOrder() { showform('insert'); }
+      function newItem(order_id) {
+        document.getElementById('order_ID').value = order_id;
+        showform('insertItem');
+      }
+      function updateOrder(order_ID, order_status, order_date, employee_ID, customer_ID) {
+        document.getElementById('update_order_Id').value = order_ID;
+        console.log(order_ID);
+        var objSelect = document.getElementById('order_status');
+        setSelectedValue (objSelect, order_status);
+          document.getElementById('order_date').value = order_date;
+          document.getElementById('employee_ID').value = employee_ID;
+          document.getElementById('customer_ID').value = customer_ID;
+          showform('update');
+      }
+      function deleteOrder(order_id) { showform('delete'); }
+      function browseOrders() { showform('browse'); }
+      function showAll() { showform('all') }
+    </script>
+  </head>
+  <body onload="browseOrders()">
+    <a href="#" onClick="showAll()"><a href="index.html"><h3>Home</h3></a>
+    [ <a href="employees">Employees</a> | <a href="customers">Customers</a> | <a href="products">Products</a> | <a href="orders">Orders</a> | <a href="invoices">Invoices</a> ]
+    <h1>Orders</h1>
+
+    <div id="browse">
+      <table border="1" cellpadding="5"  class="table table-striped">
+        <tr>
+          <a href="#" onClick="newOrder()"><h3>New Order</h3></a>
+          <th>ID</th>
+          <th>Status</th>
+          <th>Date</th>
+          <th>employee</th>
+          <th>customer</th>
+          <th>Update Status</th>
+          <th>Delete</th>
+          <th>Add Item</th>
+        </tr>
+        {{#each model.result}}
+        <tr>
+          <td>{{order_ID}}</td>
+          <td align="right" >{{Status}}</td>
+          <td align="right" >{{formatDate Date}}</td>
+          <td>{{Employee}}</td>
+          <td>{{Customer}} </td>
+          <td><a href="#" onClick="updateOrder('{{order_ID}}', '{{Status}}', '{{formatDate Date}}','{{employee_ID}}', '{{customer_ID}}' )">Edit</a></td>
+          <td><a href="/deleteOrder/{{order_ID}}">Delete</a></td>
+          <td><a href="#" onClick="newItem('{{order_ID}}')">+ Item</a></td>
+        </tr>
+        {{/each}}
+      </table>
+    </div> <!-- end browse Orders -->
+    <p>&nbsp;</p>
+    <div id="insert" style="display:none">
+        <form method="POST" id="addOrder" action="/addOrder" method="post">
+            <legend><strong>Add Order</strong></legend>
+              <fieldset class="fields">
+                <label> Status </label> <select name="order_status">
+                  <option value="0">&nbsp;</option>
+                  <option value="Placed">Placed</option>
+                  <option value="Paid">Paid</option>
+                  <option value="Filled">Filled</option>
+                  <option value="Return">Return</option>
+                  </select>
+                <label> Date </label> <input required type="date" name="order_date">
+                <label> Employee </label>
+                <select required name="employee_ID" id="employee_ID">
+                  {{#each employees.result}}
+                  <option value="{{employee_ID}}">{{first_name}} {{last_name}}</option>
+                  {{/each}}
+                </select>
+                <label> Customer </label>
+                <select required name="customer_ID" id="customer_ID">
+                  {{#each customers.result}}
+                  <option value="{{customer_ID}}">{{business_name}}</option>
+                  {{/each}}
+                </select>
+              </fieldset>
+              <input class="btn" type="submit" id="addOrder" value="Add Order">
+              <input class="btn" type="button" value="cancel" onClick="browseOrders()">
+        </form>
+      </div>  <!--end insert Order -->
+      <p>&nbsp;</p>
+      <div id="insertItem" style="display:none">
+        <form method="POST" id="addItem" action="/addProducts_Orders">
+            <legend><strong>Add Item to Order</strong></legend>
+              <fieldset class="fields">
+                <!-- These fields will populate based on clicking of plus. -->
+                <label> order_ID </label> <input required type="text" name="order_ID" id="order_ID"><br />
+                <label> Product Name </label>
+                <select required name="product_ID" id="product_ID">
+                  {{#each products.result}}
+                  <option value="{{product_ID}}">{{name}} - Inv:{{inventory}} - Price:{{wholesale_unit_price}}</option>
+                  {{/each}}
+                </select><br />
+
+                <label> <strong>Quantity</strong> </label> <input required type="number" name="quantity" id="quantity"><br />
+                <label> Selling unit price </label> <input required type="number" step=".01" name="price_per_unit" id="price_per_unit" ><br />
+              </fieldset>
+              <input class="btn" type="submit" id="addItem" value="Add Item to Order">
+              <input class="btn" type="button" value="cancel" onClick="browseOrders()">
+        </form>
+      </div>  <!--end insert Item -->
+      <p>&nbsp</p>
+      <div id="update" style="display:none">
+        <form method="POST" id="updateOrder" action="/updateOrder">
+          <legend><strong>Update Order</strong></legend>
+          <fieldset class="fields">
+            <input required type="hidden" name="update_order_Id" id="update_order_Id">
+            <label> Status </label> <select required name="order_status" id="order_status">
+              <option value="0">&nbsp;</option>
+              <option value="Placed">Placed</option>
+              <option value="Paid">Paid</option>
+              <option value="Filled">Filled</option>
+              <option value="Return">Return</option>
+              </select>
+            <label> Date </label> <input required type="text" name="order_date" id="order_date">
+             <input required type="hidden" name="employee_ID" id="employee_ID" />
+             <input required type="hidden" name="customer_ID" id="customer_ID" />
+          </fieldset>
+          <input class="btn" type="submit" id="UpdateSaveOrder" value="Save Order Update">
+          <input class="btn" type="button" value="cancel" onClick="browseOrders()">
+        </form>
+      </div>  <!--end update Order -->
+      <p>&nbsp</p>
+  </body>
+</html>
