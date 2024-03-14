@@ -2,6 +2,12 @@
     SETUP
 node*/
 
+/*
+# Citation for app.js from NODE.js starter app code
+# 22 Feb 2024
+# Adapted from material in nodejs-starter-app in OSU CS340 course github repo
+# URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+*/
 
 // Express
 var express = require('express');
