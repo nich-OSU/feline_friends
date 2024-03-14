@@ -1,4 +1,4 @@
-# feline_friends
+# Feeding Feline Friends
 ## Oregon State University Computer Science course 340 Project
     web based user interface for relational database
 
