@@ -115,7 +115,7 @@
             <legend><strong>Add Order</strong></legend>
               <fieldset class="fields">
                 <label> Status </label> <select name="order_status">
-                  <option value="0">&nbsp;</option>
+                  <option value="0" selected disabled>Select status</option>
                   <option value="Placed">Placed</option>
                   <option value="Paid">Paid</option>
                   <option value="Filled">Filled</option>
@@ -124,12 +124,14 @@
                 <label> Date </label> <input required type="date" name="order_date">
                 <label> Employee </label>
                 <select required name="employee_ID" id="employee_ID">
+                  <option value="" selected disabled>Select Employee</option>
                   {{#each employees.result}}
                   <option value="{{employee_ID}}">{{first_name}} {{last_name}}</option>
                   {{/each}}
                 </select>
                 <label> Customer </label>
                 <select required name="customer_ID" id="customer_ID">
+                  <option value="" selected disabled>Select Customer</option>
                   {{#each customers.result}}
                   <option value="{{customer_ID}}">{{business_name}}</option>
                   {{/each}}
