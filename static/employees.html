@@ -1,3 +1,11 @@
+<!-- ------------------------------------------
+# Citations for index.html from 1. NODE.js starter app code and 2. course starter code
+# 22 Feb 2024
+# 1.  Adapted from material in nodejs-starter-app in OSU CS340 course github repo
+#     URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+# 2.  Adapted from material in course material from Project Step 3 starter code called bsg_HTML_UI.zip
+#     URL: https://canvas.oregonstate.edu/courses/1946034/assignments/9456216?wrap=1
+-------------------------------------------- -->
 <html>
   <head>
     <style>
@@ -52,8 +60,8 @@
     <a href="#" onClick="showAll()"><a href="index.html"><h3>Home</h3></a>
     [ <a href="employees">Employees</a> | <a href="customers">Customers</a> | <a href="products">Products</a> | <a href="orders">Orders</a> | <a href="invoices">Invoices</a> ]
     <h1>Employees</h1>
-
-    <div id="browse">
+    
+      <div id="browse">
       <table border="1" cellpadding="5"  class="table table-striped">
         <a href="#" onClick="newEmployee()"><h3>New Employee</h3></a>
         <tr>
@@ -81,6 +89,7 @@
       </table>
       <p>&nbsp;</p>
       </div> <!-- end browse Employees -->
+
       <div id="insert" style="display:none">
         <form method="post" action="/addEmployee">
             <legend><strong>Add Employee</strong></legend>
@@ -95,6 +104,7 @@
               <input class="btn" type="button" value="cancel" onClick="browseEmployees()">
         </form>
       </div>  <!--end insert Employee -->
+      
       <p>&nbsp</p>
       <div id="update" style="display:none">
         <form method="post" action="/updateEmployee">
@@ -112,7 +122,12 @@
         </form>
       </div>  <!--end update Employee -->
       <p>&nbsp</p>
-      <!-- <p><a href="#" onClick="showAll()">Display all forms</a> </p> -->
 
   </body>
 </html>
+<!-- ------------------------------------------------ 
+# Citation for form input type formatting:
+# 13 Mar 2024
+# Copied from W3 Schools HTML Input Types page
+# URL: https://www.w3schools.com/html/html_form_input_types.asp
+ _________________________________________________________ -->
