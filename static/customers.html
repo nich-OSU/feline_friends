@@ -1,3 +1,11 @@
+<!-- ------------------------------------------
+# Citations for customers.html from 1. NODE.js starter app code and 2. course starter code
+# 22 Feb 2024
+# 1.  Adapted from material in nodejs-starter-app in OSU CS340 course github repo
+#     URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+# 2.  Adapted from material in course material from Project Step 3 starter code called bsg_HTML_UI.zip
+#     URL: https://canvas.oregonstate.edu/courses/1946034/assignments/9456216?wrap=1
+-------------------------------------------- -->
 <html>
   <head>
     <style>
@@ -76,7 +84,7 @@
           <th>Edit</th>
           <th>Delete</th>
         </tr>
-
+<!-- 	handlebars to populate table info -->
         {{#each model.result}}
         <tr>
           <td>{{customer_ID}}</td>
@@ -91,6 +99,7 @@
       </table>
       <p>&nbsp;</p>
       </div> <!-- end browse Customer -->
+	    
       <div id="insert" style="display:none">
         <form method="POST" id="addCustomer" action="/addCustomer" method="post">
             <legend><strong>Add Customer</strong></legend>
@@ -105,6 +114,7 @@
         </form>
       </div>  <!--end insert Customer -->
       <p>&nbsp</p>
+	    
       <div id="update" style="display:none">
         <form method="POST" id="updateCustomer" action="/updateCustomer">
           <legend><strong>Update Customer</strong></legend>
@@ -122,3 +132,10 @@
       <p>&nbsp</p>
   </body>
 </html>
+
+<!-- ------------------------------------------------ 
+# Citation for form input type formatting:
+# 13 Mar 2024
+# Copied from W3 Schools HTML Input Types page
+# URL: https://www.w3schools.com/html/html_form_input_types.asp
+ _________________________________________________________ -->
