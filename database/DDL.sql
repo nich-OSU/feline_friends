@@ -7,6 +7,13 @@
             Nicholas Murray
 **********/
 
+/*
+# Citation for creating transaction and category tables.
+# 24 Jan 2024
+# Based on material from Activity 3 in OSU CS340 course
+# URL: https://canvas.oregonstate.edu/courses/1946034/pages/activity-3-creating-transaction-and-category-tables?module_item_id=23809299
+*/
+
 /**********
 Drop tables if exist
 **********/
@@ -66,6 +73,13 @@ CREATE TABLE Orders (
   FOREIGN KEY (employee_ID) REFERENCES Employees(employee_ID) ON DELETE SET NULL,
   FOREIGN KEY (customer_ID) REFERENCES Customers(customer_ID) ON DELETE SET NULL
 );
+
+/*
+# Citation for creating database intersection tables.
+# 29 Jan 2024
+# Based on material from Activity 4 in OSU CS340 course
+# URL: https://canvas.oregonstate.edu/courses/1946034/pages/activity-4-creating-database-intersection-tables?module_item_id=23809307
+*/
 
 -- Products_Orders
 CREATE TABLE Products_Orders (
